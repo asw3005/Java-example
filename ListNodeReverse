@@ -1,0 +1,59 @@
+class ListNode {
+
+    ListNode next;
+    int val;
+
+    ListNode(ListNode next, int val) {
+        this.next = next;
+        this.val = val;
+    }
+
+    @Override
+    public String toString() {
+       return this.val + "";
+    }
+
+    public static ListNode reverseListNode(ListNode head) {
+
+        if (head == null) return null;
+
+        ListNode current = head;
+        ListNode previous = null;
+        ListNode nextNode = null;
+
+        while (current.next != null) {
+            //2
+            nextNode = current.next;
+            //1 -> null
+            current.next = previous;
+            //1
+            previous = current;
+            //1 -> 2
+            current = nextNode;
+        }
+        current.next = previous;
+        return current;
+    }
+
+    public static void main(String[] arg) {
+        ListNode c = new ListNode(null,3);
+        ListNode b = new ListNode(c,2);
+        ListNode a = new ListNode(b,1);
+
+
+        ListNode result = a;
+
+        while (result != null) {
+            System.out.print(result + "->");
+            result = result.next;
+        }
+        System.out.print("null");
+        System.out.println();
+        result = reverseListNode(a);
+        while (result != null) {
+            System.out.print(result + "->");
+            result = result.next;
+        }
+        System.out.print("null");
+    }
+}
